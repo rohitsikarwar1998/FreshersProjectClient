@@ -1,0 +1,50 @@
+.documentItem {
+    width: 40%;
+    background-color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.documentItem:hover {
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.documentTitle {
+    margin-top: 10px;
+    font-size: 1.2em;
+}
+
+.documentDate {
+    font-size: 0.8em;
+}
+
+.documentDate > span {
+    margin-left: 10px;
+}
+.documentDate > i {
+    color: #3d7fba;
+}
+
+.documentLink {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-flow: row-reverse;
+}
+
+.documentLink > a {
+    color: #3d7fba;
+    border: 1px solid #3d7fba;
+    border-radius: 3px;
+    padding: 2px 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.documentLink > a:hover {
+    color: white;
+    background-color: #3d7fba;
+}
