@@ -13,13 +13,15 @@ const useFetchItems = (url: string) => {
     useEffect(() => {
         if (url) {
             setResult({ status: 'loading' });
-            fetch(url)
-                .then((response) => response.json())
-                .then((res) => {
-                    console.log(res);
-                    setResult({ status: 'loaded', payload: res.data[0] });
-                })
-                .catch((err) => setResult({ status: 'error', error: new Error(err.message) }));
+            setTimeout(() => {
+                fetch(url)
+                    .then((response) => response.json())
+                    .then((res) => {
+                        console.log(res);
+                        setResult({ status: 'loaded', payload: res.data[0] });
+                    })
+                    .catch((err) => setResult({ status: 'error', error: new Error(err.message) }));
+            }, 5000);
         }
     }, [url]);
 
