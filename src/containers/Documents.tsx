@@ -22,6 +22,7 @@ function Documents() {
     });
     useEffect(() => {
         document.addEventListener('scroll', trackScrolling);
+        trackScrolling();
     }, [documents]);
 
     useEffect(() => {
@@ -32,10 +33,12 @@ function Documents() {
     }, [result.status]);
 
     const trackScrolling = () => {
+        console.log('scrolled');
         if (container.current.getBoundingClientRect().bottom <= window.innerHeight) {
             let tempUrl = URL;
             if (documents.length !== 0)
                 tempUrl += '?startDate=' + documents[documents.length - 1].date;
+            console.log(tempUrl);
             setUrl(tempUrl);
             document.removeEventListener('scroll', trackScrolling);
         }
