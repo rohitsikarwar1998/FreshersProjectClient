@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from 'react';
+import DocumentFilter from '../components/DocumentFilter/DocumentFilter';
 import DocumentList from '../components/DocumentList/DocumentList';
 import Loading from '../components/Loading/Loading';
 import useFetchItems from '../hooks/FetchItems';
@@ -11,6 +12,8 @@ function Documents() {
     const [url, setUrl] = useState<string>(URL);
     const [hasEnded, setHasEnded] = useState<boolean>(false);
     const [documents, setDocuments] = useState<Document[]>([]);
+    const [startDate, setStartDate] = useState<string>('');
+    const [finalOption, setFinalOption] = useState<number>(0);
 
     let container: any = useRef(null);
     const result = useFetchItems(url);
@@ -21,6 +24,7 @@ function Documents() {
         };
     });
     useEffect(() => {
+        console.log('added');
         document.addEventListener('scroll', trackScrolling);
         trackScrolling();
     }, [documents]);
@@ -32,6 +36,14 @@ function Documents() {
         }
     }, [result.status]);
 
+    useEffect(() => {
+        let tempUrl = URL;
+        if (startDate !== '') tempUrl += '?num=' + finalOption + '&startDate=' + startDate;
+        setDocuments([]);
+        setHasEnded(false);
+        setUrl(tempUrl);
+    }, [startDate, finalOption]);
+
     const trackScrolling = () => {
         console.log('scrolled');
         if (container.current.getBoundingClientRect().bottom <= window.innerHeight) {
@@ -40,14 +52,16 @@ function Documents() {
                 tempUrl += '?startDate=' + documents[documents.length - 1].date;
             console.log(tempUrl);
             setUrl(tempUrl);
+            console.log('removed');
             document.removeEventListener('scroll', trackScrolling);
         }
     };
 
     return (
         <div ref={container}>
+            <DocumentFilter setFinalOption={setFinalOption} setStartDate={setStartDate} />
             <DocumentList documents={documents} />
-            {result.status === 'loading' && <Loading />}
+            {!hasEnded && <Loading />}
             {hasEnded && <p style={{ textAlign: 'center' }}>You're all cought up!</p>}
             {result.status === 'error' && <div>{result.error?.message}</div>}
         </div>
