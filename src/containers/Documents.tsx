@@ -26,7 +26,7 @@ function Documents() {
     useEffect(() => {
         console.log('added');
         document.addEventListener('scroll', trackScrolling);
-        trackScrolling();
+        // trackScrolling();
     }, [documents]);
 
     useEffect(() => {
@@ -39,6 +39,7 @@ function Documents() {
     useEffect(() => {
         let tempUrl = URL;
         if (startDate !== '') tempUrl += '?num=' + finalOption + '&startDate=' + startDate;
+        else tempUrl += '?num=' + finalOption;
         setDocuments([]);
         setHasEnded(false);
         setUrl(tempUrl);
@@ -49,7 +50,8 @@ function Documents() {
         if (container.current.getBoundingClientRect().bottom <= window.innerHeight) {
             let tempUrl = URL;
             if (documents.length !== 0)
-                tempUrl += '?startDate=' + documents[documents.length - 1].date;
+                tempUrl +=
+                    '?startDate=' + documents[documents.length - 1].date + '&num=' + finalOption;
             console.log(tempUrl);
             setUrl(tempUrl);
             console.log('removed');
@@ -62,7 +64,7 @@ function Documents() {
             <DocumentFilter setFinalOption={setFinalOption} setStartDate={setStartDate} />
             <DocumentList documents={documents} />
             {!hasEnded && <Loading />}
-            {hasEnded && <p style={{ textAlign: 'center' }}>You're all cought up!</p>}
+            {hasEnded && <p style={{ textAlign: 'center' }}>You're all caught up!</p>}
             {result.status === 'error' && <div>{result.error?.message}</div>}
         </div>
     );

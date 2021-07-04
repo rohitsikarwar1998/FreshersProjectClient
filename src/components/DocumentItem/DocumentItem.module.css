@@ -15,11 +15,11 @@
 
 .documentTitle {
     margin-top: 10px;
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 .documentDate {
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 .documentDate > span {
@@ -47,4 +47,10 @@
 .documentLink > a:hover {
     color: white;
     background-color: #3d7fba;
+}
+
+@media (max-width: 900px) {
+    .documentItem {
+        width: 70%;
+    }
 }

@@ -1,14 +1,26 @@
 .documentFilter {
-    position: relative;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    height: 20px;
+    padding: 10px;
+    align-content: space-between;
+    align-items: center;
 }
 
 .links > select {
     height: 100%;
+    border: 1px solid #3d7fba;
+    border-radius: 2px;
+    padding: 5px 10px;
+    outline: none;
+    background-color: white;
+    color: rgb(73, 73, 73);
+    margin: 2px;
+}
+
+.links > select:hover {
+    background-color: #e9eef6;
 }
 
 /* .links {
@@ -50,8 +62,32 @@
 .links:hover::before {
     color: rgba(255, 255, 255, 0.6);
     background-color: rgba(255, 255, 255, 0.2);
+}*/
+
+.links > select > option {
+    padding: 5px 10px;
 }
 
-.links select option {
-    padding: 30px;
-} */
+input[type='text'] {
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: 1px solid #3d7fba;
+    outline: none;
+    color: rgb(73, 73, 73);
+    margin: 2px;
+}
+
+.btn {
+    color: #3d7fba;
+    border: 1px solid #3d7fba;
+    background-color: white;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin: 2px;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:hover {
+    color: white;
+    background-color: #3d7fba;
+}
