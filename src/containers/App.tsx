@@ -1,7 +1,7 @@
-import Documents from './Documents';
+import Home from './Home';
 
 function App() {
-    return <Documents />;
+    return <Home />;
 }
 
 export default App;

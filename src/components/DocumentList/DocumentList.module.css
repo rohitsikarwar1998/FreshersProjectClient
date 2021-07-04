@@ -13,3 +13,9 @@
         margin-right: 5%;
     }
 }
+@media (max-width: 500px) {
+    .documentList {
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}

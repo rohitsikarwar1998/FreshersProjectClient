@@ -24,7 +24,12 @@ const options = [
     }
 ];
 
-const DocumentFilter = (props: any) => {
+interface Props {
+    setStartDate: Function;
+    setFinalOption: Function;
+}
+
+const DocumentFilter = (props: Props) => {
     const [date, setDate] = useState<string>('');
     const [option, setOption] = useState<number>(0);
 
@@ -42,7 +47,7 @@ const DocumentFilter = (props: any) => {
         if (date !== '') {
             let temp: string[] = date.split('/');
             props.setStartDate(`${temp[2]}-${temp[1]}-${temp[0]}T00:00:00`);
-        }
+        } else props.setStartDate('');
         props.setFinalOption(option);
     }
 

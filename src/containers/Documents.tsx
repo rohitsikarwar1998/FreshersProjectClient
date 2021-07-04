@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from 'react';
-import DocumentFilter from '../components/DocumentFilter/DocumentFilter';
 import DocumentList from '../components/DocumentList/DocumentList';
 import Loading from '../components/Loading/Loading';
 import useFetchItems from '../hooks/FetchItems';
@@ -8,15 +7,25 @@ import { Document } from '../interfaces';
 
 const URL = 'http://localhost:8000/documents/';
 
-function Documents() {
+interface Props {
+    startDate: string;
+    finalOption: number;
+    isChanged: boolean;
+}
+
+function Documents(props: Props) {
     const [url, setUrl] = useState<string>(URL);
     const [hasEnded, setHasEnded] = useState<boolean>(false);
     const [documents, setDocuments] = useState<Document[]>([]);
-    const [startDate, setStartDate] = useState<string>('');
-    const [finalOption, setFinalOption] = useState<number>(0);
 
-    let container: any = useRef(null);
     const result = useFetchItems(url);
+    let container: any = useRef(null);
+
+    const { startDate, finalOption, isChanged } = props;
+
+    useEffect(() => {
+        setDocuments([]);
+    }, [isChanged]);
 
     useEffect(() => {
         return () => {
@@ -26,7 +35,7 @@ function Documents() {
     useEffect(() => {
         console.log('added');
         document.addEventListener('scroll', trackScrolling);
-        // trackScrolling();
+        trackScrolling();
     }, [documents]);
 
     useEffect(() => {
@@ -36,15 +45,6 @@ function Documents() {
         }
     }, [result.status]);
 
-    useEffect(() => {
-        let tempUrl = URL;
-        if (startDate !== '') tempUrl += '?num=' + finalOption + '&startDate=' + startDate;
-        else tempUrl += '?num=' + finalOption;
-        setDocuments([]);
-        setHasEnded(false);
-        setUrl(tempUrl);
-    }, [startDate, finalOption]);
-
     const trackScrolling = () => {
         console.log('scrolled');
         if (container.current.getBoundingClientRect().bottom <= window.innerHeight) {
@@ -52,6 +52,8 @@ function Documents() {
             if (documents.length !== 0)
                 tempUrl +=
                     '?startDate=' + documents[documents.length - 1].date + '&num=' + finalOption;
+            else if (startDate !== '') tempUrl += '?startDate=' + startDate + '&num=' + finalOption;
+            else tempUrl += '?num=' + finalOption;
             console.log(tempUrl);
             setUrl(tempUrl);
             console.log('removed');
@@ -61,7 +63,6 @@ function Documents() {
 
     return (
         <div ref={container}>
-            <DocumentFilter setFinalOption={setFinalOption} setStartDate={setStartDate} />
             <DocumentList documents={documents} />
             {!hasEnded && <Loading />}
             {hasEnded && <p style={{ textAlign: 'center' }}>You're all caught up!</p>}

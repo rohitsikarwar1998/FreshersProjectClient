@@ -17,7 +17,7 @@
     height: 20px;
     position: absolute;
     border-radius: 50%;
-    background-color: #3d7fba;
+    background-color: var(--secondary-color);
     left: 15%;
     transform-origin: 50%;
     animation: circle 0.5s alternate infinite ease;
@@ -90,7 +90,13 @@
     font-weight: 600;
     font-size: 20px;
     letter-spacing: 5px;
-    color: #3d7fba;
+    color: var(--secondary-color);
     left: 50%;
     transform: translateX(-50%);
+}
+
+@media (max-width: 500px) {
+    .wrapperContainer {
+        transform: scale(0.7);
+    }
 }
