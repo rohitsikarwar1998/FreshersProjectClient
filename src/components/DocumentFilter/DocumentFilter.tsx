@@ -46,7 +46,10 @@ const DocumentFilter = (props: Props) => {
     function handleOnClick(e: any) {
         if (date !== '') {
             let temp: string[] = date.split('/');
-            props.setStartDate(`${temp[2]}-${temp[1]}-${temp[0]}T00:00:00`);
+            if (temp.length !== 3) {
+                props.setStartDate('');
+                setDate('');
+            } else props.setStartDate(`${temp[2]}-${temp[1]}-${temp[0]}T00:00:00`);
         } else props.setStartDate('');
         props.setFinalOption(option);
     }
