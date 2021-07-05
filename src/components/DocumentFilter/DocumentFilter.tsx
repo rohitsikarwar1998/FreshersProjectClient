@@ -34,12 +34,10 @@ const DocumentFilter = (props: Props) => {
     const [option, setOption] = useState<number>(0);
 
     function handleOptionChange(e: any) {
-        console.log(e.target.value);
         setOption(e.target.value);
     }
 
     function handleDateChange(e: any) {
-        console.log(e.target.value);
         setDate(e.target.value);
     }
 

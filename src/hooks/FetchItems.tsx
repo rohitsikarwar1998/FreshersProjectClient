@@ -16,7 +16,6 @@ const useFetchItems = (url: string) => {
             fetch(url)
                 .then((response) => response.json())
                 .then((res) => {
-                    // console.log(res);
                     setResult({ status: 'loaded', payload: res.data[0] });
                 })
                 .catch((err) => setResult({ status: 'error', error: new Error(err.message) }));

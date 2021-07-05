@@ -34,7 +34,6 @@ function Documents(props: Props) {
         };
     });
     useEffect(() => {
-        console.log('added');
         document.addEventListener('scroll', trackScrolling);
         trackScrolling();
     }, [documents]);
@@ -47,7 +46,6 @@ function Documents(props: Props) {
     }, [result.status]);
 
     const trackScrolling = () => {
-        console.log('scrolled');
         if (container.current.getBoundingClientRect().bottom <= window.innerHeight) {
             let tempUrl = URL;
             if (documents.length !== 0)
@@ -55,9 +53,7 @@ function Documents(props: Props) {
                     '?startDate=' + documents[documents.length - 1].date + '&num=' + finalOption;
             else if (startDate !== '') tempUrl += '?startDate=' + startDate + '&num=' + finalOption;
             else tempUrl += '?num=' + finalOption;
-            console.log(tempUrl);
             setUrl(tempUrl);
-            console.log('removed');
             document.removeEventListener('scroll', trackScrolling);
         }
     };
