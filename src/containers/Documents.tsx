@@ -25,6 +25,7 @@ function Documents(props: Props) {
 
     useEffect(() => {
         setDocuments([]);
+        setHasEnded(false);
     }, [isChanged]);
 
     useEffect(() => {
