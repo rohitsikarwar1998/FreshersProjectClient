@@ -14,7 +14,7 @@ interface Props {
 }
 
 function Documents(props: Props) {
-    const [url, setUrl] = useState<string>(URL);
+    const [url, setUrl] = useState<string>('');
     const [hasEnded, setHasEnded] = useState<boolean>(false);
     const [documents, setDocuments] = useState<Document[]>([]);
 
